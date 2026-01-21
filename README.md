@@ -1,13 +1,8 @@
-# Data Quality & Validation Framework (Production-Style)
+# Data Quality & Validation Framework
 
 A lightweight, production-oriented **Data Quality framework** that runs **config-driven validation suites** (schema, nulls, ranges, uniqueness, referential integrity, row-count reconciliation, freshness) against CSV extracts and produces **JSON + HTML** reports.
 
-## Why this project stands out (recruiter-friendly)
-- **Data Quality Gates**: stop bad data before it hits BI/ML
-- **Config-driven rules**: YAML suites reusable across datasets
-- **Audit-ready reporting**: structured evidence of pass/fail
-- **CI-ready**: pytest + GitHub Actions
-- **Extensible**: add new checks without touching the runner
+
 
 ## Features
 - ✅ Schema checks (expected columns + types)
@@ -17,7 +12,6 @@ A lightweight, production-oriented **Data Quality framework** that runs **config
 - ✅ Referential integrity checks (FK across datasets)
 - ✅ Freshness checks (max age of timestamp column)
 - ✅ Reports: `reports/latest_report.json` and `reports/latest_report.html`
-- ✅ Exit codes for orchestration: **0 pass**, **2 fail**, **1 error**
 
 ---
 
@@ -94,11 +88,4 @@ docker run --rm -v "$PWD:/app" dqf python -m dqf.cli run --rules configs/sample_
 
 ---
 
-## Portfolio upgrades (ideas)
-- Add DB connectors (Postgres/Snowflake) and validate tables directly
-- Emit quality metrics to Prometheus / CloudWatch
-- Integrate as an Airflow quality gate before downstream tasks
-- Store historical reports and track data quality trends
 
-## License
-MIT
