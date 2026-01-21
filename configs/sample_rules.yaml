@@ -1,0 +1,40 @@
+suite_name: "sample_quality_gate"
+datasets:
+  - name: "customers"
+    path: "customers.csv"
+    checks:
+      - type: "schema"
+        columns:
+          customer_id: "int"
+          email: "str"
+          created_at: "datetime"
+          country: "str"
+      - type: "null_rate"
+        thresholds:
+          email: 0.10
+      - type: "unique"
+        columns: ["customer_id"]
+
+  - name: "orders"
+    path: "orders.csv"
+    checks:
+      - type: "schema"
+        columns:
+          order_id: "int"
+          customer_id: "int"
+          order_amount: "float"
+          order_ts: "datetime"
+          status: "str"
+      - type: "range"
+        column: "order_amount"
+        min: 0
+        max: 50000
+      - type: "unique"
+        columns: ["order_id"]
+      - type: "fk"
+        column: "customer_id"
+        ref_dataset: "customers"
+        ref_column: "customer_id"
+      - type: "freshness"
+        column: "order_ts"
+        max_age_days: 365
